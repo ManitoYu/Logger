@@ -1,0 +1,23 @@
+{
+  "name": "logger",
+  "version": "1.0.0",
+  "description": "This is a logger lib written by vanilla JS.",
+  "main": "Logger.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ManitoYu/Logger.git"
+  },
+  "keywords": [
+    "logger",
+    "log"
+  ],
+  "author": "ManitoYu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ManitoYu/Logger/issues"
+  },
+  "homepage": "https://github.com/ManitoYu/Logger#readme"
+}

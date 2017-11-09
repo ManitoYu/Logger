@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Logger</title>
+</head>
+<body>
+	<button onclick="Logger.info(11, 22, 33)">Click</button>
+	<ul></ul>
+
+	<script src="./Logger.js"></script>
+	<script>
+		const frag = document.createDocumentFragment()
+		const ul = document.querySelector('ul')
+
+		Logger
+		.setMode(Logger.Mode.Server)
+		.setLogLevel(Logger.Level.Debug)
+		.setSource(Logger.Source.Web)
+		.setVersion('2.0.0')
+		.setBatchSize(10)
+		.setBatchTimeout(10000)
+		.setPersistence(true)
+		.setPersistenceEngine(Logger.PersistenceEngine.LocalStorage)
+		.setStoragePrefix('log_')
+		.onFormat((ctx, contents) => {
+			return {
+				log_level: ctx.level,
+				log_time: ctx.time,
+				log_message: contents.map(c => typeof c == 'string' ? c : JSON.stringify(c)).join(' '),
+				log_source: ctx.source,
+				log_app_ver: ctx.version
+			}
+		})
+		.onSend((logs, cb) => {
+			console.log(logs)
+
+			logs.forEach(log => {
+				const li = document.createElement('li')
+				li.innerHTML = JSON.stringify(log)
+				frag.appendChild(li)
+			})
+
+			ul.appendChild(frag)
+
+			cb()
+		})
+	</script>
+</body>
+</html>

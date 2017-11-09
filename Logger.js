@@ -350,7 +350,7 @@ class Logger {
 	send(logs) {
 		if (logs.length === 0) return
 		if (isNull(this.onSendCallback)) return
-		this.onSendCallback(logs.map(log => log.log)).then(() => {
+		this.onSendCallback(logs.map(log => log.log), () => {
 			if (this.isPersistence) {
 				logs.forEach(log => this.clearFromStorage(log.id))
 			}
